@@ -35,3 +35,23 @@ int is_valid_date(int year, int month, int day) {
     }
     return 1; // Дата корректная
 }
+
+// Функция для удаления букв на четных позициях и подсчета количества удаленных букв
+int remove_even_positions(char *str) {
+    int length = strlen(str);
+    int count_removed = 0;
+    char temp[length + 1]; // Временный массив для хранения новой строки
+    int j = 0;
+
+    for (int i = 0; i < length; i++) {
+        if (i % 2 != 0) { // Оставляем буквы на нечетных позициях
+            temp[j++] = str[i];
+        } else {
+            count_removed++; // Увеличиваем счетчик удаленных букв
+        }
+    }
+    temp[j] = '\0'; // Завершаем строку
+
+    strcpy(str, temp); // Копируем измененную строку обратно
+    return count_removed;
+}
