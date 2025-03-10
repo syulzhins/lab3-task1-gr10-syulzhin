@@ -55,3 +55,30 @@ int remove_even_positions(char *str) {
     strcpy(str, temp); // Копируем измененную строку обратно
     return count_removed;
 }
+// Функция для сортировки студентов по возрастанию поля SES
+void sort_students(GROUP students[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (students[i].SES[0] > students[j].SES[0]) {
+                GROUP temp = students[i];
+                students[i] = students[j];
+                students[j] = temp;
+            }
+        }
+    }
+}
+
+// Функция для вывода студентов, возраст которых не превышает 20 лет на 01.12.2020
+void print_young_students(GROUP students[], int n) {
+    int found = 0;
+    for (int i = 0; i < n; i++) {
+        int age = 2020 - students[i].DAT.year;
+        if (age < 20 || (age == 20 && (students[i].DAT.month < 12 || (students[i].DAT.month == 12 && students[i].DAT.day == 1)))) {
+            printf("Студент: %s, Дата поступления: %04d-%02d-%02d\n", students[i].Name, students[i].DAT.year, students[i].DAT.month, students[i].DAT.day);
+            found = 1;
+        }
+    }
+    if (!found) {
+        printf("Студентов в возрасте до 20 лет нет.\n");
+    }
+}
